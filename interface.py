@@ -7,7 +7,6 @@ from config import comunity_token, access_token
 from core import VkTools
 # отправка сообщений
 
-
 class BotInterface():
     def __init__(self, comunity_token, access_token):
         self.vk = vk_api.VkApi(token=comunity_token)
@@ -72,7 +71,6 @@ class BotInterface():
                 else:
                     self.message_send(
                         event.user_id, 'Используйте команды только "привет" "поиск" "пока"')
-
 
 if __name__ == '__main__':
     bot_interface = BotInterface(comunity_token, access_token)
