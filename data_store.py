@@ -10,8 +10,7 @@ from config import db_url_object
 metadata = MetaData()
 Base = declarative_base()
 
-Base.metadata.create_all(engine)
-
+engine = create_engine(db_url_object)
 
 class Viewed(Base):
     __tablename__ = 'viewed'
@@ -41,8 +40,7 @@ def check_user(engine, profile_id, worksheet_id):
 
 
 if __name__ == '__main__':
-    engine = create_engine(db_url_object)
-    
+    Base.metadata.create_all(engine)
     # add_user(engine, 2113, 654623)
     res = check_user(engine, 2113, 654623)
     print(res)
