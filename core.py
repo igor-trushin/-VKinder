@@ -6,7 +6,6 @@ from vk_api.exceptions import ApiError
 
 from config import access_token
 
-
 # получение данных о пользователе
 
 
