@@ -10,7 +10,7 @@ from config import access_token
 
 
 class VkTools:
-    def __init__(self, acces_token):
+    def __init__(self, access_token):
         self.vkapi = vk_api.VkApi(token=access_token)
 
     def _bdate_toyear(self, bdate):
