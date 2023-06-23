@@ -1,9 +1,8 @@
+# импорты
 from pprint import pprint
 from datetime import datetime
-# импорты
 import vk_api
 from vk_api.exceptions import ApiError
-
 from config import access_token
 
 # получение данных о пользователе
