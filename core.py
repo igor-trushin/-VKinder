@@ -10,7 +10,7 @@ from config import access_token
 
 
 class VkTools:
-    def __init__(self, access_token):
+    def __init__(self, acces_token):
         self.vkapi = vk_api.VkApi(token=access_token)
 
     def _bdate_toyear(self, bdate):
@@ -38,6 +38,19 @@ class VkTools:
                   }
         return result
 
+    def get_city(self, city_name):
+        try:
+            cities = self.vkapi.method('database.getCities',
+                                       {
+                                         'q': city_name,
+                                         'count': 1
+                                       }
+                                       )
+            if len(cities['items']) > 0:
+                return cities['items'][0]
+        except ApiError as e:
+            print(f'error = {e}')
+
     def search_worksheet(self, params, offset):
         try:
             users = self.vkapi.method('users.search',
@@ -47,15 +60,15 @@ class VkTools:
                                           'hometown': params['city'],
                                           'sex': 1 if params['sex'] == 2 else 2,
                                           'has_photo': True,
-                                          'age_from': params['year'] - 5,
-                                          'age_to': params['year'] + 5,
+                                          'age_from': params['year'] - 3,
+                                          'age_to': params['year'] + 3,
                                       }
                                       )
         except ApiError as e:
             users = []
             print(f'error = {e}')
 
-        result = [{'name': item['first_name'] + item['last_name'],
+        result = [{'name': item['first_name'] + ' ' + item['last_name'],
                    'id': item['id']
                    } for item in users['items'] if item['is_closed'] is False
                   ]
@@ -80,7 +93,7 @@ class VkTools:
                    'comments': item['comments']['count']
                    } for item in photos['items']
                   ]
-        '''сортировка п лайкам и комментам'''
+        '''сортировка по лайкам и комментам'''
         return result[:3]
 
 
